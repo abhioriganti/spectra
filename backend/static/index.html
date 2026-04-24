@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spectra — Your Sensory Companion</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-name">Spectra</span>
+    </div>
+    <p class="logo-tagline">Your sensory companion</p>
+  </header>
+
+  <!-- Nav -->
+  <nav class="app-nav">
+    <button class="nav-btn active" onclick="navigate('dashboard')">
+      <span class="nav-icon">🏠</span> Dashboard
+    </button>
+    <button class="nav-btn" onclick="navigate('diary')">
+      <span class="nav-icon">📓</span> Sensory Diary
+    </button>
+    <button class="nav-btn" onclick="navigate('meltdown')">
+      <span class="nav-icon">🌊</span> Meltdown Log
+    </button>
+    <button class="nav-btn" onclick="navigate('scripts')">
+      <span class="nav-icon">✍️</span> Script Generator
+    </button>
+    <button class="nav-btn nav-safe" onclick="navigate('safemode')">
+      <span class="nav-icon">🛡️</span> Safe Mode
+    </button>
+  </nav>
+
+  <!-- Main -->
+  <main class="app-main" id="main-content"></main>
+
+</div>
+
+<div id="toast"></div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
