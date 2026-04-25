@@ -1,37 +1,27 @@
-# ✦ Spectra — Sensory Companion for Autistic Users
+# Spectra — Sensory Companion for Autistic Users
 
-> A calm, AI-powered app that helps autistic individuals track sensory experiences, log meltdown events, communicate their needs, and regulate during moments of overwhelm.
-
-**Live Demo:** https://spectra-l26n.onrender.com
-
----
-
-## What is Spectra?
-
-Spectra is built for autistic people who struggle with sensory overload, communication barriers, and the anxiety of advocating for their own needs in neurotypical environments. It combines personal tracking tools with Claude AI to provide real-time, personalized support.
+Spectra is an AI-powered app built to help autistic individuals track sensory experiences, log meltdown events, communicate their needs to others, and regulate during moments of overwhelm. It was built for the Anthropic Claude Hackathon.
 
 ---
 
 ## Features
 
-### 📓 Sensory Diary
-Log sensory experiences throughout the day — sound, light, smell, touch, temperature, and more. Track intensity (1–10), location, duration, and how each experience affected your ability to function.
+### Sensory Diary
+Log sensory experiences throughout the day across eight types: sound, light, smell, touch, taste, temperature, movement, and body sense. Each entry captures intensity (1-10), location, duration, and functional impact. The dashboard surfaces patterns over time.
 
-### 🌊 Meltdown Log
-A private, judgment-free space to document meltdown and shutdown events. Record triggers, severity, duration, what helped you recover, and recovery time. Patterns surface on the dashboard automatically.
+### Meltdown Log
+A private space to document meltdown and shutdown events after they happen. Record triggers, severity, duration, what helped, and recovery time. Patterns are visualized on the dashboard to help connect daily sensory load to breaking points.
 
-### ✍️ AI Script Generator
-Powered by Claude. Describe what you need to communicate in your own words — messy, anxious, unfiltered — and Spectra turns it into a clear, professional, self-advocating message. Covers workplace accommodations, medical appointments, family conversations, school requests, and more.
+### AI Script Generator
+Powered by Claude. Describe what you need to communicate in plain, unfiltered language and Spectra generates a clear, professional, self-advocating message. Covers workplace accommodations, medical appointments, family conversations, school requests, service providers, and more. Output is written to sound like a real person, not a corporate template.
 
-### 🛡️ Safe Mode
-A calm, low-stimulation crisis page for moments of overwhelm. Describe what you are feeling and Claude generates a personalized regulation plan including:
-- A validation of what you are experiencing
-- A breathing exercise chosen for your specific state (box breathing, 4-7-8, or slow breathing)
+### Safe Mode
+A calm, low-stimulation crisis page for moments of overwhelm. Describe what you are feeling and Claude generates a personalized regulation plan:
+- A direct validation of what you are experiencing
+- A breathing exercise chosen for your specific state (box breathing, 4-7-8, or slow breathing based on severity)
 - Step-by-step grounding instructions tailored to your situation
+- A closing affirmation
 - Pre-written communication cards to show another person without needing to speak
-
-### 🏠 Dashboard
-Visual overview of your sensory patterns, meltdown history, and activity across all features.
 
 ---
 
@@ -42,32 +32,41 @@ Visual overview of your sensory patterns, meltdown history, and activity across 
 | Backend | Python 3, FastAPI, Uvicorn |
 | AI | Anthropic Claude API (`claude-sonnet-4-6`) with prompt caching |
 | Database | SQLite |
-| Frontend | Vanilla HTML, CSS, JavaScript (no framework, no build step) |
-| Deployment | Render |
+| Frontend | Vanilla HTML, CSS, JavaScript |
+| Config | python-dotenv |
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
-- Python 3.10+
-- An [Anthropic API key](https://console.anthropic.com/)
+
+- Python 3.10 or higher
+- An Anthropic API key from [console.anthropic.com](https://console.anthropic.com/)
 
 ### Installation
 
 ```bash
-# Clone the repo
+# Clone the repository
 git clone https://github.com/abhioriganti/spectra.git
 cd spectra
 
 # Install dependencies
 pip install -r backend/requirements.txt
 
-# Set up your API key
+# Set up environment variables
 cp backend/.env.example backend/.env
-# Open backend/.env and add your ANTHROPIC_API_KEY
+```
 
-# Start the server
+Open `backend/.env` and add your API key:
+
+```
+ANTHROPIC_API_KEY=your_api_key_here
+```
+
+### Run
+
+```bash
 python backend/main.py
 ```
 
@@ -80,47 +79,45 @@ Open **http://localhost:8000** in your browser.
 ```
 spectra/
 ├── backend/
-│   ├── main.py              # FastAPI app — all routes and Claude API logic
+│   ├── main.py              # FastAPI app — all API routes and Claude logic
 │   ├── requirements.txt     # Python dependencies
-│   ├── .env.example         # API key template
+│   ├── .env.example         # Environment variable template
 │   └── static/
 │       ├── index.html       # App shell and navigation
 │       ├── style.css        # All styles
-│       └── app.js           # Full frontend SPA
-├── render.yaml              # Render deployment config
-└── .gitignore
+│       └── app.js           # Frontend single-page app
+├── render.yaml              # Deployment config
+├── .gitignore
+└── README.md
 ```
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/diary` | Get all sensory diary entries |
+| POST | `/api/diary` | Create a new sensory entry |
+| DELETE | `/api/diary/{id}` | Delete a sensory entry |
+| GET | `/api/meltdown` | Get all meltdown log entries |
+| POST | `/api/meltdown` | Create a new meltdown entry |
+| DELETE | `/api/meltdown/{id}` | Delete a meltdown entry |
+| POST | `/api/generate-script` | Generate a communication script via Claude |
+| GET | `/api/scripts` | Get script generation history |
+| POST | `/api/safe-mode` | Get a personalized regulation plan via Claude |
+| GET | `/api/coping` | Get saved coping strategies |
+| POST | `/api/coping` | Save a new coping strategy |
+| DELETE | `/api/coping/{id}` | Delete a coping strategy |
+| GET | `/api/insights` | Get dashboard insights and pattern summaries |
 
 ---
 
 ## Environment Variables
 
-| Variable | Description |
-|---|---|
-| `ANTHROPIC_API_KEY` | Your Anthropic API key from console.anthropic.com |
-
----
-
-## Deployment
-
-This project is configured for one-click deployment on [Render](https://render.com).
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
-
-**Manual setup on Render:**
-- Runtime: Python 3
-- Root Directory: `backend`
-- Build Command: `pip install -r requirements.txt`
-- Start Command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-- Add `ANTHROPIC_API_KEY` as an environment variable
-
----
-
-## Built With
-
-- [Anthropic Claude API](https://www.anthropic.com/) — AI script generation and Safe Mode regulation plans
-- [FastAPI](https://fastapi.tiangolo.com/) — Backend framework
-- [Render](https://render.com/) — Deployment platform
+| Variable | Required | Description |
+|---|---|---|
+| `ANTHROPIC_API_KEY` | Yes | API key from console.anthropic.com |
 
 ---
 
