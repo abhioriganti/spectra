@@ -1,4 +1,4 @@
-# Spectra — Sensory Companion for Autistic Users
+# Spectra - Sensory Companion for Autistic Users
 
 Spectra is an AI-powered app built to help autistic individuals track sensory experiences, log meltdown events, communicate their needs to others, and regulate during moments of overwhelm. It was built for the Anthropic Claude Hackathon.
 
