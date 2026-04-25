@@ -42,7 +42,20 @@ A calm, low-stimulation crisis page for moments of overwhelm. Describe what you 
 ### Prerequisites
 
 - Python 3.10 or higher
-- An Anthropic API key from [console.anthropic.com](https://console.anthropic.com/)
+- An API key from one of the supported providers below
+
+### API Key Setup
+
+Spectra uses the Anthropic Claude API by default. You need to provide your own API key to run this project.
+
+**Get a free API key:**
+
+| Provider | Model used | Get your key |
+|---|---|---|
+| **Anthropic (default)** | `claude-sonnet-4-6` | [console.anthropic.com](https://console.anthropic.com/) |
+| **Alternative** | Any OpenAI-compatible model | [platform.openai.com](https://platform.openai.com/) |
+
+> **Note:** If you switch to a different provider, update the `client` initialization and model name in `backend/main.py` accordingly.
 
 ### Installation
 
@@ -58,11 +71,13 @@ pip install -r backend/requirements.txt
 cp backend/.env.example backend/.env
 ```
 
-Open `backend/.env` and add your API key:
+Open `backend/.env` and add your own API key:
 
 ```
 ANTHROPIC_API_KEY=your_api_key_here
 ```
+
+> **Important:** Never share your `.env` file or commit it to version control. It is already listed in `.gitignore`.
 
 ### Run
 
